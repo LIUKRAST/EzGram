@@ -33,7 +33,7 @@ public class IntelligentTextJoin extends Join {
     }
 
     private String code(String string, Update update) {
-        return IntelligentMessageParser.parseForLogging(string, update);
+        return IntelligentMessageParser.parseForJoin(string, update);
     }
 
     private String read(Path path) {

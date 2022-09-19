@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class IntelligentMessageParser {
-    public static String parseForLogging(String string, Update update) {
+    public static String parseForJoin(String string, Update update) {
         User inviter = update.getMessage().getFrom();
         StringBuilder usernames = new StringBuilder();
         StringBuilder userids = new StringBuilder();
@@ -37,6 +37,60 @@ public class IntelligentMessageParser {
         string = string.replace("${USER_LASTNAMES}", user_lastnames);
         string = string.replace("${USER_FIRSTNAMES}", user_firstnames);
         string = string.replace("${USER_LANGUAGES}", user_languages);
+
+        if(inviter.getUserName() != null) {
+            string = string.replace("${INVITER_USERNAME}", inviter.getUserName());
+        } else {
+            string = string.replace("${INVITER_USERNAME}", "no_inviter_username");
+        }
+        string = string.replace("${INVITER_USERID}", inviter.getId().toString());
+        if(inviter.getLastName() != null) {
+            string = string.replace("${INVITER_LASTNAME}", inviter.getLastName());
+        } else {
+            string = string.replace("${INVITER_LASTNAME}", "no_inviter_lastname");
+        }
+        string = string.replace("${INVITER_FIRSTNAME}", inviter.getFirstName());
+        if(inviter.getLanguageCode() != null) {
+            string = string.replace("${INVITER_LANGUAGE}", inviter.getLanguageCode());
+        } else {
+            string = string.replace("${INVITER_LANGUAGE}", "no_inviter_language");
+        }
+
+
+        return parse(string);
+    }
+
+    public static String parseForLeave(String string, Update update) {
+        User inviter = update.getMessage().getFrom();
+        StringBuilder usernames = new StringBuilder();
+        StringBuilder userids = new StringBuilder();
+        StringBuilder user_lastnames = new StringBuilder();
+        StringBuilder user_firstnames = new StringBuilder();
+        StringBuilder user_languages = new StringBuilder();
+        User user = update.getMessage().getLeftChatMember();
+        if(user.getUserName() != null) {
+            usernames.append(user.getUserName());
+        } else {
+            usernames.append("no_username");
+        }
+        userids.append(user.getId());
+        user_firstnames.append(user.getFirstName());
+        if(user.getLastName() != null) {
+            user_lastnames.append(user.getLastName());
+        } else {
+            user_lastnames.append("no_last_name");
+        }
+        if(user.getLanguageCode() != null) {
+            user_languages.append(user.getLanguageCode());
+        } else {
+            user_languages.append("no_language");
+        }
+
+        string = string.replace("${USERNAME}", usernames);
+        string = string.replace("${USERID}", userids);
+        string = string.replace("${USER_LASTNAME}", user_lastnames);
+        string = string.replace("${USER_FIRSTNAME}", user_firstnames);
+        string = string.replace("${USER_LANGUAGE}", user_languages);
 
         if(inviter.getUserName() != null) {
             string = string.replace("${INVITER_USERNAME}", inviter.getUserName());

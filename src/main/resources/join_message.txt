@@ -1,1 +1,1 @@
-Welcome to the server ${USER_FIRSTNAMES}!
+Welcome to the server ${USER_FIRSTNAMES}! You were added from ${INVITER_USERNAME}

@@ -30,7 +30,7 @@ public class IntelligentTextLeave extends Leave {
     }
 
     private String code(String string, Update update) {
-        return IntelligentMessageParser.parseForLogging(string, update);
+        return IntelligentMessageParser.parseForLeave(string, update);
     }
 
     private String read(Path path) {

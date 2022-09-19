@@ -33,7 +33,7 @@ public class IntelligentTextCommand extends Command {
 
     private String code(String string, Update update) {
         if(update.getMessage().getFrom().getUserName() == null) {
-            string = string.replace("${USERNAME}", "no_nickname");
+            string = string.replace("${USERNAME}", "no_username");
         } else {
             string = string.replace("${USERNAME}", update.getMessage().getFrom().getUserName());
         }
